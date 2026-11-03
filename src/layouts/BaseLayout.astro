@@ -1,0 +1,122 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { t, type Locale } from '../data/i18n';
+import { profile } from '../data/profile';
+
+interface Props {
+  locale: Locale;
+  /** Path relatif root tanpa leading slash, mis. `projects/web-mebel`. */
+  path?: string;
+  title?: string;
+  description?: string;
+}
+
+const { locale, path = '', title, description } = Astro.props;
+const strings = t(locale);
+
+const basePath = path ? `/${path}` : '/';
+const selfPath = locale === 'id' ? basePath : `/en${basePath}`;
+const altPath = locale === 'id' ? `/en${basePath}` : basePath;
+
+const site = Astro.site ?? new URL('http://localhost:4321');
+const canonical = new URL(selfPath, site);
+const alternateDefault = new URL(altPath, site);
+const alternateEn = new URL(locale === 'id' ? selfPath : altPath, site);
+
+const pageTitle = title ?? strings.meta.siteTitle;
+const pageDescription = description ?? strings.meta.siteDescription;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: canonical.href,
+  jobTitle: strings.hero.role,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Semarang',
+    addressCountry: 'ID',
+  },
+  knowsLanguage: ['id', 'en'],
+  sameAs: profile.socials
+    .filter((social) => social.href.startsWith('http'))
+    .map((social) => social.href),
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="author" content={profile.name} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang={locale === 'id' ? 'id' : 'en'} href={alternateDefault.href} />
+    <link rel="alternate" hreflang="en" href={alternateEn.href} />
+    <link rel="alternate" hreflang="x-default" href={alternateDefault.href} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:site_name" content={strings.meta.siteTitle} />
+    <meta property="og:locale" content={locale === 'id' ? 'id_ID' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="theme-color" content="#f1f5f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b111c" media="(prefers-color-scheme: dark)" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <!-- Terapkan tema sebelum paint pertama supaya tidak ada kedip putih. -->
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const dark = stored ? stored === 'dark' : prefersDark;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+
+  <body class="min-h-screen antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brand-600 focus:px-5 focus:py-3 focus:text-sm focus:font-medium focus:text-white"
+    >
+      {strings.a11y.skipToContent}
+    </a>
+
+    <slot />
+
+    <!-- Scroll reveal: tanpa library, hormati prefers-reduced-motion via CSS. -->
+    <script>
+      const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+      if (!('IntersectionObserver' in window)) {
+        elements.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                obs.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+
+        elements.forEach((el) => observer.observe(el));
+      }
+    </script>
+  </body>
+</html>

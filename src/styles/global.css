@@ -1,0 +1,294 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Dark mode dikontrol class .dark pada <html> (toggle manual),
+   bukan hanya prefers-color-scheme.
+--------------------------------------------------------------------------- */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens — palet "adem": biru tenang (bukan neon) + netral slate
+   yang sedikit kebiruan supaya mata nyaman saat dibaca lama.
+--------------------------------------------------------------------------- */
+@theme {
+  --font-sans:
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, monospace;
+
+  /* Brand — biru tenang */
+  --color-brand-50: #f1f6fd;
+  --color-brand-100: #e0ebfa;
+  --color-brand-200: #c6daf5;
+  --color-brand-300: #9fc0ec;
+  --color-brand-400: #6f9fdf;
+  --color-brand-500: #4a82cf;
+  --color-brand-600: #3569b8;
+  --color-brand-700: #2b5596;
+  --color-brand-800: #26497c;
+  --color-brand-900: #233e67;
+  --color-brand-950: #162742;
+
+  /* Netral dingin (sedikit kebiruan) */
+  --color-ink-50: #f8fafc;
+  --color-ink-100: #f1f5f9;
+  --color-ink-200: #e6ecf3;
+  --color-ink-300: #d3dce7;
+  --color-ink-400: #94a5b8;
+  --color-ink-500: #64748b;
+  --color-ink-600: #475569;
+  --color-ink-700: #334155;
+  --color-ink-800: #1e293b;
+  --color-ink-900: #131c2b;
+  --color-ink-950: #0b111c;
+
+  --animate-fade-up: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-50);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .dark body {
+    background-color: var(--color-ink-950);
+    color: var(--color-ink-200);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-950);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-brand-800);
+    color: var(--color-brand-100);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilitas komponen
+--------------------------------------------------------------------------- */
+@layer components {
+  /* Kontainer utama */
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 72rem; /* 1152px */
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Label mono kecil untuk metadata (nomor section, tahun, kategori) */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand-600);
+  }
+
+  .dark .eyebrow {
+    color: var(--color-brand-400);
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 1.25rem;
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.6;
+  }
+
+  /* Tombol utama */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.9375rem;
+    font-weight: 550;
+    line-height: 1;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand-600);
+    color: #fff;
+    box-shadow: 0 1px 2px rgb(21 39 66 / 0.18);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-brand-700);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--color-ink-300);
+    color: var(--color-ink-700);
+    background-color: transparent;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-brand-400);
+    color: var(--color-brand-700);
+    background-color: var(--color-brand-50);
+    transform: translateY(-1px);
+  }
+
+  .dark .btn-ghost {
+    border-color: var(--color-ink-700);
+    color: var(--color-ink-200);
+  }
+
+  .dark .btn-ghost:hover {
+    border-color: var(--color-brand-600);
+    color: var(--color-brand-200);
+    background-color: rgb(53 105 184 / 0.14);
+  }
+
+  /* Kartu */
+  .card {
+    border: 1px solid var(--color-ink-200);
+    background-color: #fff;
+    border-radius: 1.25rem;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .dark .card {
+    border-color: var(--color-ink-800);
+    background-color: var(--color-ink-900);
+  }
+
+  .card-hover:hover {
+    border-color: var(--color-brand-300);
+    box-shadow:
+      0 1px 2px rgb(21 39 66 / 0.05),
+      0 18px 40px -24px rgb(21 39 66 / 0.45);
+    transform: translateY(-3px);
+  }
+
+  .dark .card-hover:hover {
+    border-color: var(--color-brand-800);
+    box-shadow: 0 20px 46px -28px rgb(0 0 0 / 0.9);
+  }
+
+  /* Badge / chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    border: 1px solid var(--color-ink-200);
+    background-color: var(--color-ink-50);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-ink-700);
+  }
+
+  .dark .chip {
+    border-color: var(--color-ink-700);
+    background-color: var(--color-ink-800);
+    color: var(--color-ink-300);
+  }
+
+  /* Garis pemisah tipis */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--color-ink-200),
+      transparent 70%
+    );
+  }
+
+  .dark .rule {
+    background: linear-gradient(to right, var(--color-ink-800), transparent 70%);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Scroll reveal — hanya menambah class, tanpa library
+--------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Aksesibilitas: hormati preferensi pengguna yang tidak suka animasi */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

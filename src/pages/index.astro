@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout locale="id" path="">
+  <Nav locale="id" path="" />
+  <main id="main">
+    <Hero locale="id" />
+    <ProjectsGrid locale="id" />
+    <Experience locale="id" />
+    <Skills locale="id" />
+    <Contact locale="id" />
+  </main>
+  <Footer locale="id" />
+</BaseLayout>

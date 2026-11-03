@@ -1,0 +1,183 @@
+---
+import Icon from './Icon.astro';
+import { t, localeLabel, type Locale } from '../data/i18n';
+import { profile } from '../data/profile';
+
+interface Props {
+  locale: Locale;
+  /** Path halaman saat ini (tanpa leading slash) — untuk link ganti bahasa. */
+  path?: string;
+}
+
+const { locale, path = '' } = Astro.props;
+const strings = t(locale);
+
+const homeHref = locale === 'id' ? '/' : '/en/';
+const otherLocale: Locale = locale === 'id' ? 'en' : 'id';
+const otherHref =
+  otherLocale === 'id'
+    ? path
+      ? `/${path}`
+      : '/'
+    : path
+      ? `/en/${path}`
+      : '/en/';
+
+const links = [
+  { href: '#projects', label: strings.nav.projects },
+  { href: '#experience', label: strings.nav.experience },
+  { href: '#skills', label: strings.nav.skills },
+  { href: '#contact', label: strings.nav.contact },
+];
+---
+
+<header
+  data-nav
+  class="sticky top-0 z-50 border-b border-transparent backdrop-blur-md transition-colors duration-300"
+>
+  <div class="shell flex h-16 items-center justify-between gap-3">
+    <!-- Brand -->
+    <a
+      href={homeHref}
+      class="group flex items-center gap-2.5 rounded-full"
+      aria-label={strings.a11y.goHome}
+    >
+      <span
+        class="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 font-mono text-[13px] font-bold tracking-tight text-white transition-transform duration-300 group-hover:-translate-y-0.5"
+      >
+        {profile.initials}
+      </span>
+      <span class="hidden text-sm font-semibold tracking-tight sm:block">
+        {profile.name}
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Navigasi utama">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-full px-3.5 py-2 text-sm font-medium text-ink-600 transition-colors duration-200 hover:bg-ink-100 hover:text-ink-900 dark:text-ink-400 dark:hover:bg-ink-800 dark:hover:text-ink-100"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-1.5">
+      <!-- Ganti bahasa: link biasa supaya ikut ter-crawl Google -->
+      <a
+        href={otherHref}
+        hreflang={otherLocale}
+        class="grid h-9 min-w-9 place-items-center rounded-full border border-ink-200 px-2.5 font-mono text-[12px] font-semibold tracking-wider text-ink-600 transition-colors duration-200 hover:border-brand-400 hover:text-brand-700 dark:border-ink-700 dark:text-ink-300 dark:hover:border-brand-600 dark:hover:text-brand-200"
+        aria-label={strings.a11y.toggleLanguage}
+      >
+        {localeLabel[otherLocale]}
+      </a>
+
+      <!-- Ganti tema -->
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label={strings.a11y.toggleTheme}
+        class="grid h-9 w-9 place-items-center rounded-full border border-ink-200 text-ink-600 transition-colors duration-200 hover:border-brand-400 hover:text-brand-700 dark:border-ink-700 dark:text-ink-300 dark:hover:border-brand-600 dark:hover:text-brand-200"
+      >
+        <Icon name="sun" class="hidden h-[18px] w-[18px] dark:block" />
+        <Icon name="moon" class="h-[18px] w-[18px] dark:hidden" />
+      </button>
+
+      <!-- Menu mobile -->
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label={strings.a11y.openMenu}
+        class="grid h-9 w-9 place-items-center rounded-full border border-ink-200 text-ink-600 transition-colors duration-200 hover:border-brand-400 hover:text-brand-700 md:hidden dark:border-ink-700 dark:text-ink-300"
+      >
+        <Icon name="menu" class="h-5 w-5" data-menu-icon />
+      </button>
+    </div>
+  </div>
+
+  <!-- Panel mobile -->
+  <div
+    id="mobile-menu"
+    data-mobile-menu
+    class="hidden border-t border-ink-200 bg-ink-50/95 backdrop-blur-md md:hidden dark:border-ink-800 dark:bg-ink-950/95"
+  >
+    <nav class="shell flex flex-col gap-1 py-4" aria-label="Navigasi mobile">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            data-menu-link
+            class="rounded-xl px-3 py-3 text-[15px] font-medium text-ink-700 transition-colors hover:bg-ink-100 dark:text-ink-200 dark:hover:bg-ink-900"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href={profile.cv.href}
+        download={profile.cv.filename}
+        class="btn btn-primary mt-2 w-full"
+        data-menu-link
+      >
+        <Icon name="download" class="h-4 w-4" />
+        {strings.hero.downloadCv}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  /* ---- Border header muncul saat scroll ---- */
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+  const onScroll = () => {
+    if (!nav) return;
+    const scrolled = window.scrollY > 12;
+    nav.classList.toggle('border-ink-200', scrolled);
+    nav.classList.toggle('dark:border-ink-800', scrolled);
+    nav.classList.toggle('bg-ink-50/80', scrolled);
+    nav.classList.toggle('dark:bg-ink-950/80', scrolled);
+    nav.classList.toggle('shadow-[0_1px_20px_-12px_rgb(21_39_66_/_0.45)]', scrolled);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---- Ganti tema ---- */
+  document.querySelectorAll<HTMLElement>('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const root = document.documentElement;
+      const next = !root.classList.contains('dark');
+      root.classList.toggle('dark', next);
+      localStorage.setItem('theme', next ? 'dark' : 'light');
+    });
+  });
+
+  /* ---- Menu mobile ---- */
+  const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  if (menuToggle && mobileMenu) {
+    const setOpen = (open: boolean) => {
+      mobileMenu.classList.toggle('hidden', !open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setOpen(mobileMenu.classList.contains('hidden'));
+    });
+
+    mobileMenu.querySelectorAll('[data-menu-link]').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) setOpen(false);
+    });
+  }
+</script>
