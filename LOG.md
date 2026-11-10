@@ -202,8 +202,22 @@
   - Repo: **https://github.com/hadanaM/PortfolioHadanamaulana**
   - Branch `main` ter-track ke `origin/main`, commit `0d7b6b0` ter-push
 - `.gitignore` sudah mengecualikan `.vercel/`, `.env*`, `dist/`, `node_modules/`
+- Auto-deploy: `vercel git connect` masih gagal (400) — perlu **Login
+  Connection** GitHub di https://vercel.com/account/authentication dulu;
+  sementara update manual pakai `npm run deploy`
 
-### 23. Log
+### 23. Foto Baru Web CRUD & Modul + Perbaikan Kalimat (user)
+
+- `public/images/projects/web-crud/` → 4 foto asli (`crud1-4.jpeg`)
+  menggantikan placeholder SVG (dihapus)
+- `public/images/projects/modul/modul3.png` → foto ketiga Modul Robotik
+- Placeholder SVG lama dihapus: `web-crud-1/2`, `web-mebel-1/2`,
+  `modul-robotik-1/2`
+- `src/data/projects.ts` → gallery: Web CRUD 4 foto, Modul 3 foto
+- `src/data/experience.ts` → perbaikan kalimat deskripsi
+- Build 14 halaman ✓ → `npm run deploy` → live ✓ → push `3dafb50`
+
+### 24. Log
 
 - File `LOG.md` ini ditulis & diperbarui setiap ada perubahan
 
