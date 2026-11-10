@@ -44,9 +44,9 @@ export const experiences: Experience[] = [
         role: 'Pengajar Ekstra Robotik',
         org: 'Ekstrakurikuler Robotik',
         summary:
-          'Mendampingi peserta belajar merakit dan memprogram robot, sekaligus menyusun materi praktikum yang bisa diikuti pemula.',
+          'Mendampingi peserta belajar merakit dan memprogram robot, sekaligus menyusun materi belajar yang bisa diikuti pemula.',
         highlights: [
-          'Menyusun materi praktikum bertahap dari perakitan dasar hingga pemrograman.',
+          'Menyusun materi belajar bertahap dari pengenalan sensor, alat, dan bahan, hingga perakitan dasar hingga pemrograman.',
           'Mendampingi peserta mengerjakan proyek robot secara langsung.',
           'Mengevaluasi hasil kerja peserta dan memberi perbaikan terarah.',
         ],
@@ -55,9 +55,9 @@ export const experiences: Experience[] = [
         role: 'Robotics Extracurricular Instructor',
         org: 'Robotics Extracurricular Club',
         summary:
-          'Guiding participants in assembling and programming robots, while preparing practicum material that beginners can follow.',
+          'Guiding participants in assembling and programming robots, while also preparing learning materials suitable for beginners.',
         highlights: [
-          'Preparing step-by-step practicum material from basic assembly to programming.',
+          'Developing step-by-step learning materials covering sensor introduction, tools, and basic assembly to programming.',
           'Coaching participants through hands-on robot projects.',
           'Assessing participants work and giving targeted feedback.',
         ],
@@ -99,9 +99,10 @@ export const experiences: Experience[] = [
         summary:
           'Pengalaman operasional langsung di lapangan: bekerja dengan hardware dan perangkat mekanik, serta mengikuti alur kerja industri yang terukur.',
         highlights: [
-          'Menjalankan tugas operasional pada perangkat hardware dan mekanik.',
+          'Merancang dan merakit struktur mekanik robot Automated Guided Vehicle (AGV) untuk kebutuhan efisiensi dan otomasi operasional pabrik.',
+          'Mengintegrasikan komponen mekanik dengan sistem kelistrikan dasar dan modul IoT untuk mendukung kontrol dan pemantauan robot.',
+          'Melakukan pengujian sistem (testing) serta pemecahan masalah (troubleshooting) fungsi mekanik dan kelistrikan dasar di areaproduksi.',
           'Mengikuti prosedur kerja industri dan standar keselamatan.',
-          'Mencatat hasil pekerjaan dan menyusun laporan secara terstruktur.',
         ],
       },
       en: {
@@ -110,9 +111,10 @@ export const experiences: Experience[] = [
         summary:
           'Direct field operations experience: working with hardware and mechanical equipment, and following measurable industrial workflows.',
         highlights: [
-          'Carried out operational tasks on hardware and mechanical equipment.',
-          'Followed industrial work procedures and safety standards.',
-          'Recorded work results and compiled structured reports.',
+          'Designing and assembling the mechanical structure of an Automated Guided Vehicle (AGV) robot to enhance operational efficiency and automation in the factory.',
+          'Integrating mechanical components with basic electrical systems and IoT modules to support robot control and monitoring.',
+          'Conducting system testing and troubleshooting of mechanical and basic electrical functions in the production area.',
+          'Adhering to industrial work procedures and safety standards.',
         ],
       },
     },

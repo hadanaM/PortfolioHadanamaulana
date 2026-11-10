@@ -108,42 +108,56 @@ export const projects: Project[] = [
     tech: ['Laravel', 'MySQL', 'Blade', 'PHP'],
     gallery: [
       {
-        src: '/images/projects/web-crud-1.svg',
+        src: '/images/projects/web-crud/crud1.jpeg',
         alt: {
           id: 'Antarmuka daftar data pada aplikasi CRUD',
           en: 'Data listing interface of the CRUD application',
         },
       },
       {
-        src: '/images/projects/web-crud-2.svg',
+        src: '/images/projects/web-crud/crud2.jpeg',
+        alt: {
+          id: 'Tampilan Data Siswa untuk menambah dan mengubah data dengan validasi',
+          en: 'Student Data view for adding and editing data with validation',
+        },
+      },
+      {
+        src: '/images/projects/web-crud/crud3.jpeg',
         alt: {
           id: 'Formulir tambah dan ubah data dengan validasi',
           en: 'Create and edit form with validation',
+        },
+      },
+      {
+        src: '/images/projects/web-crud/crud4.jpeg',
+        alt: {
+          id: 'Tampilan Log Aktivitas untuk menelusuri perubahan data',
+          en: 'Activity log view for tracking data changes',
         },
       },
     ],
     content: {
       id: {
         title: 'Web CRUD',
-        subtitle: 'Aplikasi pengelolaan data dengan validasi dan pencarian',
+        subtitle: 'Aplikasi pengelolaan data siswa dengan validasi dan Log Aktivitas',
         summary:
-          'Aplikasi web untuk mengelola data secara terstruktur: tambah, ubah, hapus, cari, dan filter — sebagai fondasi pemahaman arsitektur MVC.',
+          'Aplikasi web untuk mengelola data siswa secara terstruktur: tambah, ubah, dan hapus — sebagai fondasi pemahaman arsitektur MVC.',
         problem:
           'Pengelolaan data yang sebelumnya dilakukan lewat spreadsheet rentan terhadap duplikasi, kesalahan format, dan kesulitan mencari ketika jumlah data bertambah banyak.',
         approach:
-          'Saya menerapkan pola MVC Laravel: model menangani relasi dan aturan bisnis, controller memproses request, dan Blade menyajikan tampilan. Setiap input divalidasi di sisi server, dilengkapi pagination, pencarian, dan filter agar tetap ringan saat data bertambah.',
+          'Saya menerapkan pola MVC Laravel: model menangani relasi dan aturan bisnis, controller memproses request, dan Blade menyajikan tampilan. Setiap input divalidasi di sisi server, dilengkapi pagination agar tetap ringan saat data bertambah.',
         result:
           'Data menjadi lebih terstruktur dan konsisten. Validasi memblokir input yang salah sejak awal, pencarian mempercepat penelusuran, dan struktur ini menjadi dasar ketika saya lanjut ke proyek Web Mebel.',
       },
       en: {
         title: 'CRUD Web App',
-        subtitle: 'Data management application with validation and search',
+        subtitle: 'Student data management application with validation and activity log',
         summary:
-          'A web application for structured data management: create, read, update, delete, search, and filter — as a foundation for understanding MVC architecture.',
+          'A web application for managing student data in a structured way: create, read, update, and delete — as a foundation for understanding the MVC architecture.',
         problem:
           'Data previously managed through spreadsheets was prone to duplication, formatting errors, and became hard to search as the dataset grew.',
         approach:
-          'I applied the Laravel MVC pattern: models handle relations and business rules, controllers process requests, and Blade renders the views. Every input is validated server-side, together with pagination, search, and filtering so the application stays light as data grows.',
+          'I implemented the Laravel MVC pattern: models handle relationships and business rules, controllers process requests, and Blade renders the views. Each input is validated server-side, with pagination to keep performance light as data grows.',
         result:
           'Data became more structured and consistent. Validation blocks wrong input at the door, search speeds up lookup, and this structure became the foundation when I moved on to the furniture store project.',
       },
@@ -267,8 +281,15 @@ export const projects: Project[] = [
       {
         src: '/images/projects/modul/modul2.png',
         alt: {
-          id: 'Halaman instruksi langkah praktikum di dalam modul',
-          en: 'Practicum step instructions inside the module',
+          id: 'Halaman pengenalan sensor yang akan dipakai',
+          en: 'Page introducing the sensors to be used',
+        },
+      },
+      {
+        src: '/images/projects/modul/modul3.png',
+        alt: {
+          id: 'Halaman instruksi/urutan merakit kelistrikan',
+          en: 'Page with instructions/steps for assembling the electrical components',
         },
       },
     ],
