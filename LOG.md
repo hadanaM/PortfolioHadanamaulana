@@ -194,7 +194,16 @@
   (= `npx -y vercel@65.14.0 deploy --prod --yes` — sudah diuji, Ready)
 - `package.json` → script `deploy` ditambahkan
 
-### 22. Log
+### 22. Push ke GitHub
+
+- Install GitHub CLI (`gh` 2.63.2) ke `~/.local/bin/gh` (tanpa sudo)
+- `gh auth login` (device flow, kode one-time) → login sebagai `hadanaM`
+- `gh repo create PortfolioHadanamaulana --public --source=. --remote=origin --push`
+  - Repo: **https://github.com/hadanaM/PortfolioHadanamaulana**
+  - Branch `main` ter-track ke `origin/main`, commit `0d7b6b0` ter-push
+- `.gitignore` sudah mengecualikan `.vercel/`, `.env*`, `dist/`, `node_modules/`
+
+### 23. Log
 
 - File `LOG.md` ini ditulis & diperbarui setiap ada perubahan
 
