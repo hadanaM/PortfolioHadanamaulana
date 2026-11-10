@@ -202,7 +202,7 @@
   - Repo: **https://github.com/hadanaM/PortfolioHadanamaulana**
   - Branch `main` ter-track ke `origin/main`, commit `0d7b6b0` ter-push
 - `.gitignore` sudah mengecualikan `.vercel/`, `.env*`, `dist/`, `node_modules/`
-- Auto-deploy: `vercel git connect` masih gagal (400) — perlu **Login
+- Auto-deploy: `vercel git connect` sempat gagal (400) — perlu **Login
   Connection** GitHub di https://vercel.com/account/authentication dulu;
   sementara update manual pakai `npm run deploy`
 
@@ -217,7 +217,16 @@
 - `src/data/experience.ts` → perbaikan kalimat deskripsi
 - Build 14 halaman ✓ → `npm run deploy` → live ✓ → push `3dafb50`
 
-### 24. Log
+### 24. Auto-Deploy Aktif (GitHub → Vercel)
+
+- Login Connection GitHub diaktifkan (dashboard Vercel → Authentication)
+- **Vercel GitHub App** di-install di akun `hadanaM`
+  (github.com/apps/vercel → Install → All repositories)
+- `vercel git connect --yes` → **Connected** ✅
+- Tes: push commit kosong `c8e2d97` → Vercel build otomatis → Ready (15 dtk)
+- **Hasil: `git push` = langsung live** — `npm run deploy` tidak perlu lagi
+
+### 25. Log
 
 - File `LOG.md` ini ditulis & diperbarui setiap ada perubahan
 
