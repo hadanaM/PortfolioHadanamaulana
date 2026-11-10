@@ -50,9 +50,7 @@ const sections = [
         <p class="eyebrow">
           {categoryLabels[project.category]} · {project.year}
         </p>
-        <h1
-          class="mt-4 text-[2.25rem] leading-[1.08] font-semibold tracking-[-0.03em] text-ink-950 sm:text-[3rem] dark:text-ink-50"
-        >
+        <h1 class="mt-4 text-[2.25rem] leading-[1.08] font-semibold tracking-[-0.03em] text-ink-950 sm:text-[3rem] dark:text-ink-50">
           {content.title}
         </h1>
         <p class="mt-4 text-lg leading-relaxed text-ink-600 dark:text-ink-400">
@@ -60,8 +58,10 @@ const sections = [
         </p>
       </header>
 
-      <div
-        class="mt-10 overflow-hidden rounded-3xl border border-ink-200 dark:border-ink-800"
+      <button
+        type="button"
+        data-gallery-open="0"
+        class="relative mt-10 block w-full overflow-hidden rounded-3xl border border-ink-200 dark:border-ink-800"
         data-reveal
         style="--reveal-delay: 80ms"
       >
@@ -72,56 +72,89 @@ const sections = [
           height="750"
           class="aspect-[16/9] w-full object-cover dark:brightness-90 dark:saturate-[0.85]"
         />
-      </div>
+        {project.gallery.length > 1 && (
+          <span
+            class="absolute bottom-3 right-3 rounded-full bg-ink-950/70 px-2.5 py-1 font-mono text-[11px] text-white"
+            aria-hidden="true"
+          >
+            1 / {project.gallery.length}
+          </span>
+        )}
+      </button>
 
       <div class="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
         <div class="lg:col-span-8">
           <div class="space-y-10">
-            {
-              sections.map((section, i) => (
-                <section data-reveal style={`--reveal-delay: ${i * 70}ms`}>
-                  <h2 class="flex items-center gap-3 font-mono text-[12px] tracking-widest text-brand-600 uppercase dark:text-brand-400">
-                    <span class="h-px w-6 bg-current opacity-50" />
-                    {section.label}
-                  </h2>
-                  <p class="mt-4 text-[16.5px] leading-[1.75] text-ink-600 dark:text-ink-400">
-                    {section.body}
-                  </p>
-                </section>
-              ))
-            }
-          </div>
-
-          {
-            project.gallery.length > 1 && (
-              <section class="mt-12" data-reveal>
+            {sections.map((section, i) => (
+              <section data-reveal style={`--reveal-delay: ${i * 70}ms`}>
                 <h2 class="flex items-center gap-3 font-mono text-[12px] tracking-widest text-brand-600 uppercase dark:text-brand-400">
                   <span class="h-px w-6 bg-current opacity-50" />
-                  {strings.labels.gallery}
+                  {section.label}
                 </h2>
-                <div class="mt-5 grid gap-4 sm:grid-cols-2">
-                  {project.gallery.map((image) => (
-                    <a
-                      href={image.src}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      class="group overflow-hidden rounded-2xl border border-ink-200 dark:border-ink-800"
-                    >
-                      <img
-                        src={image.src}
-                        alt={image.alt[locale]}
-                        width="1200"
-                        height="750"
-                        loading="lazy"
-                        decoding="async"
-                        class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] dark:brightness-90 dark:saturate-[0.85]"
-                      />
-                    </a>
-                  ))}
-                </div>
+                <p class="mt-4 text-[16.5px] leading-[1.75] text-ink-600 dark:text-ink-400">
+                  {section.body}
+                </p>
               </section>
-            )
-          }
+            ))}
+          </div>
+
+          {project.gallery.length > 1 && (
+            <section class="mt-12" data-reveal>
+              <h2 class="flex items-center gap-3 font-mono text-[12px] tracking-widest text-brand-600 uppercase dark:text-brand-400">
+                <span class="h-px w-6 bg-current opacity-50" />
+                {strings.labels.gallery}
+                <span
+                  class="ml-auto font-mono text-[11px] text-ink-400 dark:text-ink-500"
+                  data-carousel-counter
+                ></span>
+              </h2>
+
+              <!-- Carousel galeri: 2 foto tampil (1 di mobile), geser pakai tombol/swipe -->
+              <div class="relative mt-5" data-carousel>
+                <div class="overflow-hidden">
+                  <div
+                    class="flex gap-4 transition-transform duration-500 ease-out"
+                    data-carousel-track
+                  >
+                    {project.gallery.map((image, i) => (
+                      <button
+                        type="button"
+                        data-gallery-open={i}
+                        class="group w-full shrink-0 overflow-hidden rounded-2xl border border-ink-200 sm:w-[calc(50%-0.5rem)] dark:border-ink-800"
+                      >
+                        <img
+                          src={image.src}
+                          alt={image.alt[locale]}
+                          width="1200"
+                          height="750"
+                          loading="lazy"
+                          decoding="async"
+                          class="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] dark:brightness-90 dark:saturate-[0.85]"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  data-carousel-prev
+                  aria-label={locale === 'id' ? 'Galeri sebelumnya' : 'Previous gallery'}
+                  class="absolute top-1/2 left-1 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-ink-200 bg-white/90 text-ink-600 shadow-sm transition-colors hover:bg-white hover:text-brand-700 sm:left-2 dark:border-ink-700 dark:bg-ink-900/90 dark:text-ink-300 dark:hover:bg-ink-800"
+                >
+                  <Icon name="arrow-left" class="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  data-carousel-next
+                  aria-label={locale === 'id' ? 'Galeri berikutnya' : 'Next gallery'}
+                  class="absolute top-1/2 right-1 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-ink-200 bg-white/90 text-ink-600 shadow-sm transition-colors hover:bg-white hover:text-brand-700 sm:right-2 dark:border-ink-700 dark:bg-ink-900/90 dark:text-ink-300 dark:hover:bg-ink-800"
+                >
+                  <Icon name="arrow-right" class="h-4 w-4" />
+                </button>
+              </div>
+            </section>
+          )}
         </div>
 
         <aside class="lg:col-span-4">
@@ -131,11 +164,9 @@ const sections = [
                 {strings.labels.techStack}
               </h2>
               <ul class="mt-3 flex flex-wrap gap-2">
-                {
-                  project.tech.map((item) => (
-                    <li class="chip !px-2.5 !py-1 !text-[12.5px]">{item}</li>
-                  ))
-                }
+                {project.tech.map((item) => (
+                  <li class="chip !px-2.5 !py-1 !text-[12.5px]">{item}</li>
+                ))}
               </ul>
             </div>
 
@@ -143,38 +174,36 @@ const sections = [
               <h2 class="font-mono text-[11px] tracking-widest text-ink-400 uppercase dark:text-ink-500">
                 {strings.labels.links}
               </h2>
-              {
-                project.links?.repo || project.links?.demo ? (
-                  <div class="mt-3 flex flex-col gap-2">
-                    {project.links.repo && (
-                      <a
-                        href={project.links.repo}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        class="btn btn-ghost w-full justify-start"
-                      >
-                        <Icon name="github" class="h-4 w-4" />
-                        {strings.labels.repository}
-                      </a>
-                    )}
-                    {project.links.demo && (
-                      <a
-                        href={project.links.demo}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        class="btn btn-ghost w-full justify-start"
-                      >
-                        <Icon name="external" class="h-4 w-4" />
-                        {strings.labels.liveDemo}
-                      </a>
-                    )}
-                  </div>
-                ) : (
-                  <p class="mt-3 text-sm leading-relaxed text-ink-500 dark:text-ink-400">
-                    {strings.labels.noLink}
-                  </p>
-                )
-              }
+              {project.links?.repo || project.links?.demo ? (
+                <div class="mt-3 flex flex-col gap-2">
+                  {project.links.repo && (
+                    <a
+                      href={project.links.repo}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      class="btn btn-ghost w-full justify-start"
+                    >
+                      <Icon name="github" class="h-4 w-4" />
+                      {strings.labels.repository}
+                    </a>
+                  )}
+                  {project.links.demo && (
+                    <a
+                      href={project.links.demo}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      class="btn btn-ghost w-full justify-start"
+                    >
+                      <Icon name="external" class="h-4 w-4" />
+                      {strings.labels.liveDemo}
+                    </a>
+                  )}
+                </div>
+              ) : (
+                <p class="mt-3 text-sm leading-relaxed text-ink-500 dark:text-ink-400">
+                  {strings.labels.noLink}
+                </p>
+              )}
             </div>
 
             <div class="card p-5" data-reveal style="--reveal-delay: 140ms">
@@ -195,13 +224,8 @@ const sections = [
 
       <div class="mt-16 border-t border-ink-200 pt-10 dark:border-ink-800" data-reveal>
         <p class="eyebrow">{strings.labels.nextProject}</p>
-        <a
-          href={`${prefix}/projects/${next.slug}`}
-          class="group mt-4 flex items-baseline gap-3"
-        >
-          <span
-            class="text-2xl font-semibold tracking-tight text-ink-950 transition-colors group-hover:text-brand-700 sm:text-3xl dark:text-ink-50 dark:group-hover:text-brand-300"
-          >
+        <a href={`${prefix}/projects/${next.slug}`} class="group mt-4 flex items-baseline gap-3">
+          <span class="text-2xl font-semibold tracking-tight text-ink-950 transition-colors group-hover:text-brand-700 sm:text-3xl dark:text-ink-50 dark:group-hover:text-brand-300">
             {next.content[locale].title}
           </span>
           <Icon
@@ -215,6 +239,235 @@ const sections = [
       </div>
     </div>
   </main>
+
+  <!-- Lightbox galeri proyek: buka dari foto utama/thumbnail, geser kiri/kanan -->
+  <div
+    data-gallery
+    class="fixed inset-0 z-[100] hidden items-center justify-center bg-ink-950/85 p-4 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    aria-label={locale === 'id' ? 'Galeri proyek' : 'Project gallery'}
+  >
+    <button
+      type="button"
+      data-gallery-close
+      aria-label={strings.a11y.closeMenu}
+      class="absolute top-4 right-4 grid h-10 w-10 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10"
+    >
+      <Icon name="close" class="h-5 w-5" />
+    </button>
+
+    <button
+      type="button"
+      data-gallery-prev
+      aria-label={locale === 'id' ? 'Foto sebelumnya' : 'Previous photo'}
+      class="absolute left-2 grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 sm:left-6"
+    >
+      <Icon name="arrow-left" class="h-5 w-5" />
+    </button>
+
+    <figure class="flex max-h-full max-w-4xl flex-col items-center gap-3">
+      <img
+        data-gallery-img
+        src=""
+        alt=""
+        class="max-h-[75vh] w-auto max-w-full rounded-xl object-contain"
+      />
+      <figcaption class="flex items-center gap-3 font-mono text-[12px] text-white/75">
+        <span data-gallery-counter></span>
+        <span data-gallery-caption class="font-sans text-[13px] text-white/60"></span>
+      </figcaption>
+    </figure>
+
+    <button
+      type="button"
+      data-gallery-next
+      aria-label={locale === 'id' ? 'Foto berikutnya' : 'Next photo'}
+      class="absolute right-2 grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 sm:right-6"
+    >
+      <Icon name="arrow-right" class="h-5 w-5" />
+    </button>
+  </div>
+
+  <!-- Data galeri proyek ini (src + caption per foto) -->
+  <script
+    type="application/json"
+    data-gallery-data
+    set:html={JSON.stringify(
+      project.gallery.map((image) => ({
+        src: image.src,
+        caption: image.alt[locale],
+      })),
+    )}
+  ></script>
+
+  <script>
+    /* Carousel galeri: tampil 2 foto per halaman (1 di mobile), geser
+       pakai tombol atau swipe. Klik foto tetap buka lightbox. */
+    document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+      const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+      const btnPrev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+      const btnNext = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+      const counter = root.parentElement?.querySelector<HTMLElement>('[data-carousel-counter]');
+      const slides = track ? Array.from(track.children) : [];
+      if (!track || slides.length === 0) return;
+
+      let page = 0;
+
+      const perView = () => (window.innerWidth >= 640 ? 2 : 1);
+      const pageCount = () => Math.max(1, Math.ceil(slides.length / perView()));
+
+      const render = () => {
+        const total = pageCount();
+        if (page > total - 1) page = total - 1;
+        const first = slides[0] as HTMLElement;
+        const offset = (first.offsetWidth + 16) * perView();
+        track.style.transform = `translateX(-${page * offset}px)`;
+
+        const show = total > 1;
+        btnPrev?.classList.toggle('hidden', !show);
+        btnNext?.classList.toggle('hidden', !show);
+        if (counter) counter.textContent = show ? `${page + 1} / ${total}` : '';
+      };
+
+      btnPrev?.addEventListener('click', () => {
+        page = (page - 1 + pageCount()) % pageCount();
+        render();
+      });
+      btnNext?.addEventListener('click', () => {
+        page = (page + 1) % pageCount();
+        render();
+      });
+
+      window.addEventListener('resize', render);
+      render();
+
+      /* Swipe galeri di layar sentuh — bedakan dengan klik (buka lightbox). */
+      let startX = 0;
+      let moved = false;
+      track.addEventListener(
+        'touchstart',
+        (e) => {
+          startX = e.touches[0]?.clientX ?? 0;
+          moved = false;
+        },
+        { passive: true },
+      );
+      track.addEventListener(
+        'touchmove',
+        (e) => {
+          if (Math.abs((e.touches[0]?.clientX ?? 0) - startX) > 10) moved = true;
+        },
+        { passive: true },
+      );
+      track.addEventListener(
+        'touchend',
+        (e) => {
+          const dx = (e.changedTouches[0]?.clientX ?? 0) - startX;
+          if (Math.abs(dx) > 40) {
+            page = (page + (dx > 0 ? -1 : 1) + pageCount()) % pageCount();
+            render();
+          }
+        },
+        { passive: true },
+      );
+      track.addEventListener(
+        'click',
+        (e) => {
+          if (moved) {
+            e.stopPropagation();
+            e.preventDefault();
+            moved = false;
+          }
+        },
+        true,
+      );
+    });
+  </script>
+
+  <script>
+    /* Data galeri: disuntik dari server (JSON aman di HTML). */
+    const raw = document.querySelector<HTMLScriptElement>('[data-gallery-data]');
+    type Slide = { src: string; caption: string };
+    const slides: Slide[] = raw ? JSON.parse(raw.textContent ?? '[]') : [];
+
+    const box = document.querySelector<HTMLElement>('[data-gallery]');
+    const img = box?.querySelector<HTMLImageElement>('[data-gallery-img]');
+    const counter = box?.querySelector<HTMLElement>('[data-gallery-counter]');
+    const caption = box?.querySelector<HTMLElement>('[data-gallery-caption]');
+    const btnClose = box?.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const btnPrev = box?.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+    const btnNext = box?.querySelector<HTMLButtonElement>('[data-gallery-next]');
+
+    let active = 0;
+
+    const render = () => {
+      const slide = slides[active];
+      if (!img || !counter || !slide) return;
+      img.src = slide.src;
+      img.alt = slide.caption;
+      counter.textContent = `${active + 1} / ${slides.length}`;
+      if (caption) caption.textContent = slide.caption;
+    };
+
+    const open = (index: number) => {
+      if (!box || slides.length === 0) return;
+      active = Math.min(Math.max(index, 0), slides.length - 1);
+      render();
+      box.classList.remove('hidden');
+      box.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      btnClose?.focus();
+    };
+
+    const close = () => {
+      box?.classList.add('hidden');
+      box?.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    const step = (delta: number) => {
+      if (slides.length === 0) return;
+      active = (active + delta + slides.length) % slides.length;
+      render();
+    };
+
+    document.querySelectorAll<HTMLElement>('[data-gallery-open]').forEach((el) => {
+      el.addEventListener('click', () => open(Number(el.dataset.galleryOpen)));
+    });
+
+    btnClose?.addEventListener('click', close);
+    btnPrev?.addEventListener('click', () => step(-1));
+    btnNext?.addEventListener('click', () => step(1));
+    box?.addEventListener('click', (e) => {
+      if (e.target === box) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (box?.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+
+    /* Swipe untuk layar sentuh. */
+    let startX = 0;
+    box?.addEventListener(
+      'touchstart',
+      (e) => {
+        startX = e.touches[0]?.clientX ?? 0;
+      },
+      { passive: true },
+    );
+    box?.addEventListener(
+      'touchend',
+      (e) => {
+        const dx = (e.changedTouches[0]?.clientX ?? 0) - startX;
+        if (Math.abs(dx) > 40) step(dx > 0 ? -1 : 1);
+      },
+      { passive: true },
+    );
+  </script>
 
   <Footer locale={locale} />
 </div>

@@ -45,14 +45,28 @@ export const projects: Project[] = [
     tech: ['Laravel', 'MySQL', 'Blade', 'Midtrans Snap'],
     gallery: [
       {
-        src: '/images/projects/web-mebel-1.svg',
+        src: '/images/projects/mabel/tokomabel1.png',
         alt: {
           id: 'Tampilan katalog produk pada Web Mebel',
           en: 'Product catalogue view of the furniture website',
         },
       },
       {
-        src: '/images/projects/web-mebel-2.svg',
+        src: '/images/projects/mabel/tokomabel2.png',
+        alt: {
+          id: 'Halaman admin untuk mengelola produk',
+          en: 'Admin page to manage products',
+        },
+      },
+      {
+        src: '/images/projects/mabel/tokomabel3.png',
+        alt: {
+          id: 'Keranjang belanja sebelum proses checkout',
+          en: 'Shopping cart before the checkout process',
+        },
+      },
+      {
+        src: '/images/projects/mabel/tokomabel4.png',
         alt: {
           id: 'Alur checkout dengan integrasi pembayaran Midtrans',
           en: 'Checkout flow with Midtrans payment integration',
@@ -244,14 +258,14 @@ export const projects: Project[] = [
     tech: ['Document Design', 'Robotics', 'Structured Writing'],
     gallery: [
       {
-        src: '/images/projects/modul-robotik-1.svg',
+        src: '/images/projects/modul/modul1.png',
         alt: {
           id: 'Sampul modul praktikum robotik',
           en: 'Cover of the robotics practicum module',
         },
       },
       {
-        src: '/images/projects/modul-robotik-2.svg',
+        src: '/images/projects/modul/modul2.png',
         alt: {
           id: 'Halaman instruksi langkah praktikum di dalam modul',
           en: 'Practicum step instructions inside the module',

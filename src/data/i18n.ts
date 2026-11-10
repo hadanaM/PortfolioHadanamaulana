@@ -35,9 +35,12 @@ interface UiStrings {
     goHome: string;
   };
   nav: {
+    home: string;
+    about: string;
     projects: string;
     experience: string;
     skills: string;
+    certificates: string;
     contact: string;
   };
   hero: {
@@ -61,6 +64,9 @@ interface UiStrings {
     skillsEyebrow: string;
     skillsHeading: string;
     skillsIntro: string;
+    certificatesEyebrow: string;
+    certificatesHeading: string;
+    certificatesIntro: string;
     contactEyebrow: string;
     contactHeading: string;
     contactIntro: string;
@@ -92,15 +98,14 @@ interface UiStrings {
     email: string;
     linkedin: string;
     github: string;
+    instagram: string;
     whatsapp: string;
     downloadCv: string;
     copyEmail: string;
     copied: string;
   };
   footer: {
-    builtWith: string;
     rights: string;
-    disclaimer: string;
   };
   placeholder: {
     projectImage: string;
@@ -127,9 +132,12 @@ export const ui: Record<Locale, UiStrings> = {
       goHome: 'Kembali ke beranda',
     },
     nav: {
+      home: 'Beranda',
+      about: 'Tentang saya',
       projects: 'Proyek',
       experience: 'Pengalaman',
       skills: 'Keahlian',
+      certificates: 'Sertifikat',
       contact: 'Kontak',
     },
     hero: {
@@ -146,8 +154,7 @@ export const ui: Record<Locale, UiStrings> = {
     },
     sections: {
       projectsEyebrow: '01 — Proyek terpilih',
-      projectsHeading:
-        'Tiga bidang yang saya tekuni, satu arah yang jelas',
+      projectsHeading: 'Tiga bidang yang saya tekuni, satu arah yang jelas',
       projectsIntro:
         'Dari aplikasi web dengan integrasi pembayaran, sampai perancangan jaringan dan dokumentasi teknis.',
       experienceEyebrow: '02 — Pengalaman',
@@ -155,14 +162,15 @@ export const ui: Record<Locale, UiStrings> = {
       experienceIntro:
         'Pengalaman nyata sebagai asisten praktikum, peserta magang industri, dan pengajar robotik.',
       skillsEyebrow: '03 — Keahlian',
-      skillsHeading:
-        'Kombinasi yang jarang: teknis, operasional, sekaligus administratif',
+      skillsHeading: 'Kombinasi yang jarang: teknis, operasional, sekaligus administratif',
       skillsIntro:
         'Terbiasa berganti peran antara mengoperasikan alat, menulis kode, dan menyusun dokumen.',
-      contactEyebrow: '04 — Kontak',
+      certificatesEyebrow: '04 — Sertifikat & prestasi',
+      certificatesHeading: 'Sertifikat pelatihan dan capaian kompetisi',
+      certificatesIntro: 'Pelatihan yang saya ikuti serta prestasi di tingkat nasional.',
+      contactEyebrow: '05 — Kontak',
       contactHeading: 'Mari berkenalan',
-      contactIntro:
-        'Terbuka untuk diskusi peluang kerja, proyek, atau sekadar bertanya.',
+      contactIntro: 'Terbuka untuk diskusi peluang kerja, proyek, atau sekadar bertanya.',
     },
     filters: {
       all: 'Semua',
@@ -191,16 +199,14 @@ export const ui: Record<Locale, UiStrings> = {
       email: 'Email',
       linkedin: 'LinkedIn',
       github: 'GitHub',
+      instagram: 'Instagram',
       whatsapp: 'WhatsApp',
       downloadCv: 'Unduh CV',
       copyEmail: 'Salin email',
       copied: 'Tersalin!',
     },
     footer: {
-      builtWith: 'Dibangun dengan Astro & Tailwind CSS',
       rights: 'Hak cipta dilindungi.',
-      disclaimer:
-        'Foto dan sertifikat adalah placeholder sampai aset asli dipasang.',
     },
     placeholder: {
       projectImage: 'Gambar proyek belum tersedia',
@@ -226,9 +232,12 @@ export const ui: Record<Locale, UiStrings> = {
       goHome: 'Back to home',
     },
     nav: {
+      home: 'Home',
+      about: 'About me',
       projects: 'Projects',
       experience: 'Experience',
       skills: 'Skills',
+      certificates: 'Certificates',
       contact: 'Contact',
     },
     hero: {
@@ -256,7 +265,10 @@ export const ui: Record<Locale, UiStrings> = {
       skillsHeading: 'A rare mix: technical, operational, and administrative',
       skillsIntro:
         'Comfortable switching roles between operating equipment, writing code, and drafting documents.',
-      contactEyebrow: '04 — Contact',
+      certificatesEyebrow: '04 — Certificates & awards',
+      certificatesHeading: 'Training certificates and competition achievements',
+      certificatesIntro: 'Trainings I attended as well as national-level achievements.',
+      contactEyebrow: '05 — Contact',
       contactHeading: "Let's connect",
       contactIntro:
         'Open to discussions about job opportunities, projects, or just a quick question.',
@@ -288,16 +300,14 @@ export const ui: Record<Locale, UiStrings> = {
       email: 'Email',
       linkedin: 'LinkedIn',
       github: 'GitHub',
+      instagram: 'Instagram',
       whatsapp: 'WhatsApp',
       downloadCv: 'Download CV',
       copyEmail: 'Copy email',
       copied: 'Copied!',
     },
     footer: {
-      builtWith: 'Built with Astro & Tailwind CSS',
       rights: 'All rights reserved.',
-      disclaimer:
-        'Photos and certificates are placeholders until the real assets are added.',
     },
     placeholder: {
       projectImage: 'Project image not available yet',

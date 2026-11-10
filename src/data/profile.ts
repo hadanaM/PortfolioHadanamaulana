@@ -29,7 +29,7 @@ export const profile = {
   socials: [
     {
       key: 'email',
-      href: 'mailto:danadunu13@gmail.com',
+      href: 'https://mail.google.com/mail/?view=cm&to=danadunu13@gmail.com',
       label: 'danadunu13@gmail.com',
       display: 'danadunu13@gmail.com',
     },
@@ -45,6 +45,12 @@ export const profile = {
       label: 'GitHub',
       display: 'hadanaM',
     },
+    {
+      key: 'instagram',
+      href: 'https://www.instagram.com/hadana_13?psln=bGt5dHNwM3k0NXF5',
+      label: 'Instagram',
+      display: '@hadana_13',
+    },
   ] as const,
 
   /**
@@ -58,9 +64,6 @@ export const profile = {
 } satisfies Record<string, unknown>;
 
 /** Helper ambil nilai berbahasa. */
-export function localized(
-  value: Record<Locale, string>,
-  locale: Locale,
-): string {
+export function localized(value: Record<Locale, string>, locale: Locale): string {
   return value[locale];
 }

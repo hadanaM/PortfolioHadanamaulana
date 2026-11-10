@@ -11,14 +11,12 @@ const { locale } = Astro.props;
 const strings = t(locale);
 ---
 
-<section id="experience" class="scroll-mt-24 py-20 sm:py-28">
-  <div class="shell">
+<section class="py-20 sm:py-28">
+  <div class="shell" id="experience">
     <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7" data-reveal>
         <p class="eyebrow">{strings.sections.experienceEyebrow}</p>
-        <h2
-          class="mt-4 text-[2rem] leading-[1.12] font-semibold tracking-[-0.025em] text-ink-950 sm:text-[2.6rem] dark:text-ink-50"
-        >
+        <h2 class="mt-4 text-[2rem] leading-[1.12] font-semibold tracking-[-0.025em] text-ink-950 sm:text-[2.6rem] dark:text-ink-50">
           {strings.sections.experienceHeading}
         </h2>
       </div>
@@ -31,83 +29,90 @@ const strings = t(locale);
       </p>
     </div>
 
-    <ol
-      class="relative mt-12 space-y-6 border-l border-ink-200 pl-8 sm:pl-10 dark:border-ink-800"
-    >
-      {
-        sortedExperiences.map((item, index) => {
-          const content = item.content[locale];
+    <ol class="relative mt-12 space-y-6 border-l border-ink-200 pl-8 sm:pl-10 dark:border-ink-800">
+      {sortedExperiences.map((item, index) => {
+        const content = item.content[locale];
 
-          return (
-            <li class="relative" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
-              <!-- Titik pada garis timeline -->
-              <span
-                aria-hidden="true"
-                class="absolute top-8 -left-[calc(2rem+0.3125rem)] h-2.5 w-2.5 rounded-full bg-brand-600 ring-4 ring-ink-50 sm:-left-[calc(2.5rem+0.3125rem)] dark:ring-ink-950"
-              >
-              </span>
+        return (
+          <li class="relative" data-reveal style={`--reveal-delay: ${index * 80}ms`}>
+            <!-- Titik pada garis timeline -->
+            <span
+              aria-hidden="true"
+              class="absolute top-8 -left-[calc(2rem+0.3125rem)] h-2.5 w-2.5 rounded-full bg-brand-600 ring-4 ring-ink-50 sm:-left-[calc(2.5rem+0.3125rem)] dark:ring-ink-950"
+            ></span>
 
-              <article class="card card-hover p-5 sm:p-6">
-                <div class="flex flex-wrap items-start justify-between gap-3">
-                  <div class="min-w-0">
-                    <h3 class="text-lg leading-snug font-semibold tracking-tight text-ink-950 dark:text-ink-50">
-                      {content.role}
-                    </h3>
-                    <p class="mt-1 flex items-center gap-1.5 text-[15px] text-brand-700 dark:text-brand-300">
-                      <Icon name="arrow-up-right" class="h-4 w-4 opacity-70" />
-                      {content.org}
-                    </p>
-                  </div>
-
-                  <span
-                    class="shrink-0 rounded-full bg-brand-50 px-3 py-1.5 font-mono text-[11px] tracking-wide whitespace-nowrap text-brand-700 dark:bg-brand-950/70 dark:text-brand-300"
-                  >
-                    {item.period[locale]}
-                  </span>
+            <article class="card card-hover p-5 sm:p-6">
+              <div class="flex flex-wrap items-start justify-between gap-3">
+                <div class="min-w-0">
+                  <h3 class="text-lg leading-snug font-semibold tracking-tight text-ink-950 dark:text-ink-50">
+                    {content.role}
+                  </h3>
+                  <p class="mt-1 flex items-center gap-1.5 text-[15px] text-brand-700 dark:text-brand-300">
+                    <Icon name="arrow-up-right" class="h-4 w-4 opacity-70" />
+                    {content.org}
+                  </p>
                 </div>
 
-                <p class="mt-4 text-[15.5px] leading-relaxed text-ink-600 dark:text-ink-400">
-                  {content.summary}
-                </p>
+                <span class="shrink-0 rounded-full bg-brand-50 px-3 py-1.5 font-mono text-[11px] tracking-wide whitespace-nowrap text-brand-700 dark:bg-brand-950/70 dark:text-brand-300">
+                  {item.period[locale]}
+                </span>
+              </div>
 
-                <ul class="mt-4 space-y-2">
-                  {
-                    content.highlights.map((highlight) => (
-                      <li class="flex gap-2.5 text-[15px] leading-relaxed text-ink-600 dark:text-ink-400">
-                        <Icon
-                          name="check"
-                          class="mt-1 h-4 w-4 shrink-0 text-brand-500 dark:text-brand-400"
-                        />
-                        <span>{highlight}</span>
-                      </li>
-                    ))
-                  }
-                </ul>
+              <p class="mt-4 text-[15.5px] leading-relaxed text-ink-600 dark:text-ink-400">
+                {content.summary}
+              </p>
 
-                <!-- Foto & sertifikat (placeholder sampai asli dipasang) -->
-                <div class="mt-5 flex flex-wrap gap-3 border-t border-ink-100 pt-5 dark:border-ink-800">
-                  <a
-                    href={item.photo}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    class="group flex items-center gap-3 rounded-xl border border-ink-200 p-2 pr-4 transition-colors hover:border-brand-400 dark:border-ink-700 dark:hover:border-brand-700"
-                  >
-                    <img
-                      src={item.photo}
-                      alt={item.photoAlt[locale]}
-                      width="900"
-                      height="675"
-                      loading="lazy"
-                      decoding="async"
-                      class="h-12 w-16 rounded-lg object-cover dark:brightness-90"
+              <ul class="mt-4 space-y-2">
+                {content.highlights.map((highlight) => (
+                  <li class="flex gap-2.5 text-[15px] leading-relaxed text-ink-600 dark:text-ink-400">
+                    <Icon
+                      name="check"
+                      class="mt-1 h-4 w-4 shrink-0 text-brand-500 dark:text-brand-400"
                     />
-                    <span class="text-[13px] leading-tight font-medium text-ink-700 dark:text-ink-300">
-                      {locale === 'id' ? 'Foto kegiatan' : 'Activity photo'}
-                      <span class="mt-0.5 block font-mono text-[11px] text-ink-400 dark:text-ink-500">
-                        {locale === 'id' ? 'lihat' : 'view'}
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <!-- Foto & sertifikat — hanya tampil kalau asetnya ada -->
+              {(item.photos?.length || item.certificate) && (
+                <div class="mt-5 flex flex-wrap gap-3 border-t border-ink-100 pt-5 dark:border-ink-800">
+                  {item.photos?.length ? (
+                    <button
+                      type="button"
+                      data-gallery-open={index}
+                      class="group flex items-center gap-3 rounded-xl border border-ink-200 p-2 pr-4 text-left transition-colors hover:border-brand-400 dark:border-ink-700 dark:hover:border-brand-700"
+                    >
+                      <span class="relative">
+                        <img
+                          src={item.photos[0]}
+                          alt={item.photoAlt?.[locale] ?? ''}
+                          width="900"
+                          height="675"
+                          loading="lazy"
+                          decoding="async"
+                          class="h-12 w-16 rounded-lg object-cover dark:brightness-90"
+                        />
+                        {item.photos.length > 1 && (
+                          <span class="absolute -top-1.5 -right-1.5 rounded-full bg-brand-600 px-1.5 py-0.5 font-mono text-[10px] leading-none font-semibold text-white">
+                            {item.photos.length}
+                          </span>
+                        )}
                       </span>
-                    </span>
-                  </a>
+                      <span class="text-[13px] leading-tight font-medium text-ink-700 dark:text-ink-300">
+                        {locale === 'id' ? 'Foto kegiatan' : 'Activity photo'}
+                        <span class="mt-0.5 block font-mono text-[11px] text-ink-400 dark:text-ink-500">
+                          {item.photos.length > 1
+                            ? locale === 'id'
+                              ? `lihat (${item.photos.length})`
+                              : `view (${item.photos.length})`
+                            : locale === 'id'
+                              ? 'lihat'
+                              : 'view'}
+                        </span>
+                      </span>
+                    </button>
+                  ) : null}
 
                   {item.certificate && (
                     <a
@@ -134,11 +139,149 @@ const strings = t(locale);
                     </a>
                   )}
                 </div>
-              </article>
-            </li>
-          );
-        })
-      }
+              )}
+            </article>
+          </li>
+        );
+      })}
     </ol>
   </div>
+
+  <!-- Lightbox galeri foto kegiatan: buka dari kartu, geser kiri/kanan -->
+  <div
+    data-gallery
+    class="fixed inset-0 z-[100] hidden items-center justify-center bg-ink-950/85 p-4 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    aria-label={locale === 'id' ? 'Galeri foto kegiatan' : 'Activity photo gallery'}
+  >
+    <button
+      type="button"
+      data-gallery-close
+      aria-label={strings.a11y.closeMenu}
+      class="absolute top-4 right-4 grid h-10 w-10 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10"
+    >
+      <Icon name="close" class="h-5 w-5" />
+    </button>
+
+    <button
+      type="button"
+      data-gallery-prev
+      aria-label={locale === 'id' ? 'Foto sebelumnya' : 'Previous photo'}
+      class="absolute left-2 grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 sm:left-6"
+    >
+      <Icon name="arrow-left" class="h-5 w-5" />
+    </button>
+
+    <figure class="flex max-h-full max-w-3xl flex-col items-center gap-3">
+      <img
+        data-gallery-img
+        src=""
+        alt=""
+        class="max-h-[75vh] w-auto max-w-full rounded-xl object-contain"
+      />
+      <figcaption class="flex items-center gap-3 font-mono text-[12px] text-white/75">
+        <span data-gallery-counter></span>
+        <span data-gallery-caption class="font-sans text-[13px] text-white/60"></span>
+      </figcaption>
+    </figure>
+
+    <button
+      type="button"
+      data-gallery-next
+      aria-label={locale === 'id' ? 'Foto berikutnya' : 'Next photo'}
+      class="absolute right-2 grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 sm:right-6"
+    >
+      <Icon name="arrow-right" class="h-5 w-5" />
+    </button>
+  </div>
+
+  <!-- Data galeri per pengalaman (index sama dengan data-gallery-open) -->
+  <script
+    type="application/json"
+    data-gallery-data
+    set:html={JSON.stringify(sortedExperiences.map((item) => item.photos ?? []))}
+  ></script>
+
+  <script>
+    /* Data galeri: disuntik dari server per pengalaman (JSON aman di HTML). */
+    const raw = document.querySelector<HTMLScriptElement>('[data-gallery-data]');
+    const galleries: string[][] = raw ? JSON.parse(raw.textContent ?? '[]') : [];
+
+    const box = document.querySelector<HTMLElement>('[data-gallery]');
+    const img = box?.querySelector<HTMLImageElement>('[data-gallery-img]');
+    const counter = box?.querySelector<HTMLElement>('[data-gallery-counter]');
+    const caption = box?.querySelector<HTMLElement>('[data-gallery-caption]');
+    const btnClose = box?.querySelector<HTMLButtonElement>('[data-gallery-close]');
+    const btnPrev = box?.querySelector<HTMLButtonElement>('[data-gallery-prev]');
+    const btnNext = box?.querySelector<HTMLButtonElement>('[data-gallery-next]');
+
+    let active = 0;
+    let list: string[] = [];
+
+    const render = () => {
+      if (!img || !counter) return;
+      img.src = list[active] ?? '';
+      counter.textContent = `${active + 1} / ${list.length}`;
+    };
+
+    const open = (index: number) => {
+      list = galleries[index] ?? [];
+      if (!box || list.length === 0) return;
+      active = 0;
+      render();
+      box.classList.remove('hidden');
+      box.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      btnClose?.focus();
+    };
+
+    const close = () => {
+      box?.classList.add('hidden');
+      box?.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    const step = (delta: number) => {
+      if (list.length === 0) return;
+      active = (active + delta + list.length) % list.length;
+      render();
+    };
+
+    document.querySelectorAll<HTMLElement>('[data-gallery-open]').forEach((el) => {
+      el.addEventListener('click', () => open(Number(el.dataset.galleryOpen)));
+    });
+
+    btnClose?.addEventListener('click', close);
+    btnPrev?.addEventListener('click', () => step(-1));
+    btnNext?.addEventListener('click', () => step(1));
+    box?.addEventListener('click', (e) => {
+      if (e.target === box) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (box?.classList.contains('hidden')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') step(-1);
+      if (e.key === 'ArrowRight') step(1);
+    });
+
+    /* Swipe untuk layar sentuh. */
+    let startX = 0;
+    box?.addEventListener(
+      'touchstart',
+      (e) => {
+        startX = e.touches[0]?.clientX ?? 0;
+      },
+      { passive: true },
+    );
+    box?.addEventListener(
+      'touchend',
+      (e) => {
+        const dx = (e.changedTouches[0]?.clientX ?? 0) - startX;
+        if (Math.abs(dx) > 40) step(dx > 0 ? -1 : 1);
+      },
+      { passive: true },
+    );
+  </script>
 </section>

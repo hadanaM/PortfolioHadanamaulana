@@ -1,0 +1,103 @@
+---
+import { t, type Locale } from '../data/i18n';
+import { certificates } from '../data/certificates';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = t(locale);
+---
+
+<section class="py-20 sm:py-28">
+  <div class="shell" id="certificates">
+    <div class="grid gap-6 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-7" data-reveal>
+        <p class="eyebrow">{strings.sections.certificatesEyebrow}</p>
+        <h2 class="mt-4 text-[2rem] leading-[1.12] font-semibold tracking-[-0.025em] text-ink-950 sm:text-[2.6rem] dark:text-ink-50">
+          {strings.sections.certificatesHeading}
+        </h2>
+      </div>
+      <p
+        class="text-[16px] leading-relaxed text-ink-600 lg:col-span-5 lg:text-right dark:text-ink-400"
+        data-reveal
+        style="--reveal-delay: 80ms"
+      >
+        {strings.sections.certificatesIntro}
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {certificates.map((item, index) => (
+        <article
+          class:list={[
+            'card card-hover group flex flex-col overflow-hidden p-0',
+            item.featured && 'sm:col-span-2 lg:col-span-1',
+          ]}
+          data-reveal
+          style={`--reveal-delay: ${index * 70}ms`}
+        >
+          <a
+            href={item.image}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="block overflow-hidden"
+          >
+            <img
+              src={item.image}
+              alt={item.imageAlt[locale]}
+              width="1100"
+              height="780"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[11/8] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03] dark:brightness-90"
+            />
+          </a>
+
+          <div class="flex flex-1 flex-col p-5">
+            <div class="flex items-baseline justify-between gap-3">
+              <span class="font-mono text-xs text-ink-400 dark:text-ink-500">{item.year}</span>
+              {item.featured && (
+                <span class="rounded-full bg-brand-600 px-2.5 py-1 font-mono text-[10px] tracking-wider text-white uppercase">
+                  {locale === 'id' ? 'Prestasi' : 'Award'}
+                </span>
+              )}
+            </div>
+
+            <h3 class="mt-2 text-[15.5px] leading-snug font-semibold tracking-tight text-ink-950 dark:text-ink-50">
+              {item.title[locale]}
+            </h3>
+            <p class="mt-1 text-[13.5px] leading-snug text-ink-500 dark:text-ink-400">
+              {item.issuer[locale]}
+            </p>
+
+            <a
+              href={item.image}
+              target="_blank"
+              rel="noreferrer noopener"
+              class="mt-4 inline-flex items-center gap-1.5 self-start text-sm font-medium text-brand-700 transition-colors group-hover:text-brand-800 dark:text-brand-300 dark:group-hover:text-brand-200"
+            >
+              {locale === 'id' ? 'Lihat sertifikat' : 'View certificate'}
+              <svg
+                class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.6"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

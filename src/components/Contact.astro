@@ -17,7 +17,7 @@ const cards = [
     label: strings.contact.email,
     value: profile.socials[0].display,
     href: profile.socials[0].href,
-    external: false,
+    external: true,
   },
   {
     key: 'linkedin' as const,
@@ -35,25 +35,30 @@ const cards = [
     href: profile.socials[2].href,
     external: true,
   },
+  {
+    key: 'instagram' as const,
+    icon: 'instagram' as const,
+    label: strings.contact.instagram,
+    value: profile.socials[3].display,
+    href: profile.socials[3].href,
+    external: true,
+  },
 ];
 ---
 
-<section id="contact" class="scroll-mt-24 py-20 sm:py-28">
-  <div class="shell">
+<section class="py-20 sm:py-28">
+  <div class="shell" id="contact">
     <div class="card relative overflow-hidden p-7 sm:p-12" data-reveal>
       <!-- Aksen latar -->
       <div
         aria-hidden="true"
         class="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-brand-500/15 blur-3xl dark:bg-brand-500/20"
-      >
-      </div>
+      ></div>
 
       <div class="relative grid gap-10 lg:grid-cols-12">
         <div class="lg:col-span-6">
           <p class="eyebrow">{strings.sections.contactEyebrow}</p>
-          <h2
-            class="mt-4 text-[2rem] leading-[1.12] font-semibold tracking-[-0.025em] text-ink-950 sm:text-[2.6rem] dark:text-ink-50"
-          >
+          <h2 class="mt-4 text-[2rem] leading-[1.12] font-semibold tracking-[-0.025em] text-ink-950 sm:text-[2.6rem] dark:text-ink-50">
             {strings.sections.contactHeading}
           </h2>
           <p class="mt-4 max-w-md text-[16px] leading-relaxed text-ink-600 dark:text-ink-400">
@@ -61,53 +66,69 @@ const cards = [
           </p>
 
           <div class="mt-7 flex flex-wrap gap-3">
-            <a
-              href={profile.cv.href}
-              download={profile.cv.filename}
-              class="btn btn-primary"
-            >
+            <a href={profile.cv.href} download={profile.cv.filename} class="btn btn-primary">
               <Icon name="download" class="h-4 w-4" />
               {strings.contact.downloadCv}
             </a>
-            <a
-              href={`mailto:${profile.socials[0].label}`}
-              class="btn btn-ghost"
-            >
+            <button type="button" data-copy-email={profile.socials[0].label} class="btn btn-ghost">
               <Icon name="mail" class="h-4 w-4" />
-              {strings.contact.copyEmail}
-            </a>
+              <span data-copy-label data-copied-text={strings.contact.copied}>
+                {strings.contact.copyEmail}
+              </span>
+            </button>
           </div>
         </div>
 
         <div class="flex flex-col gap-3 lg:col-span-6">
-          {
-            cards.map((card) => (
-              <a
-                href={card.href}
-                target={card.external ? '_blank' : undefined}
-                rel={card.external ? 'noreferrer noopener' : undefined}
-                class="group flex items-center gap-4 rounded-2xl border border-ink-200 bg-ink-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-400 hover:bg-white dark:border-ink-800 dark:bg-ink-900/70 dark:hover:border-brand-700 dark:hover:bg-ink-900"
-              >
-                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white dark:bg-ink-800 dark:text-brand-300 dark:group-hover:bg-brand-600 dark:group-hover:text-white">
-                  <Icon name={card.icon} class="h-5 w-5" />
+          {cards.map((card) => (
+            <a
+              href={card.href}
+              target={card.external ? '_blank' : undefined}
+              rel={card.external ? 'noreferrer noopener' : undefined}
+              class="group flex items-center gap-4 rounded-2xl border border-ink-200 bg-ink-50/70 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-400 hover:bg-white dark:border-ink-800 dark:bg-ink-900/70 dark:hover:border-brand-700 dark:hover:bg-ink-900"
+            >
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white text-brand-600 transition-colors group-hover:bg-brand-600 group-hover:text-white dark:bg-ink-800 dark:text-brand-300 dark:group-hover:bg-brand-600 dark:group-hover:text-white">
+                <Icon name={card.icon} class="h-5 w-5" />
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block font-mono text-[11px] tracking-wider text-ink-400 uppercase dark:text-ink-500">
+                  {card.label}
                 </span>
-                <span class="min-w-0 flex-1">
-                  <span class="block font-mono text-[11px] tracking-wider text-ink-400 uppercase dark:text-ink-500">
-                    {card.label}
-                  </span>
-                  <span class="block truncate text-[15px] font-medium text-ink-800 dark:text-ink-100">
-                    {card.value}
-                  </span>
+                <span class="block truncate text-[15px] font-medium text-ink-800 dark:text-ink-100">
+                  {card.value}
                 </span>
-                <Icon
-                  name="arrow-up-right"
-                  class="h-5 w-5 shrink-0 text-ink-400 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-brand-600 dark:text-ink-500 dark:group-hover:text-brand-300"
-                />
-              </a>
-            ))
-          }
+              </span>
+              <Icon
+                name="arrow-up-right"
+                class="h-5 w-5 shrink-0 text-ink-400 transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-brand-600 dark:text-ink-500 dark:group-hover:text-brand-300"
+              />
+            </a>
+          ))}
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  /* Salin email ke clipboard — memberi respons "Tersalin!" saat diklik. */
+  const btn = document.querySelector<HTMLButtonElement>('[data-copy-email]');
+  const label = document.querySelector<HTMLElement>('[data-copy-label]');
+
+  btn?.addEventListener('click', async () => {
+    const email = btn.dataset.copyEmail ?? '';
+    try {
+      await navigator.clipboard.writeText(email);
+      if (label) {
+        const original = label.textContent;
+        label.textContent = label.dataset.copiedText ?? 'Tersalin!';
+        setTimeout(() => {
+          label.textContent = original;
+        }, 2000);
+      }
+    } catch {
+      /* Clipboard diblokir: buka mail client sebagai fallback. */
+      window.location.href = `mailto:${email}`;
+    }
+  });
+</script>

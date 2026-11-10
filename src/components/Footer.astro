@@ -9,60 +9,12 @@ interface Props {
 const { locale } = Astro.props;
 const strings = t(locale);
 const year = new Date().getFullYear();
-
-const links = [
-  { href: '#projects', label: strings.nav.projects },
-  { href: '#experience', label: strings.nav.experience },
-  { href: '#skills', label: strings.nav.skills },
-  { href: '#contact', label: strings.nav.contact },
-];
 ---
 
 <footer class="border-t border-ink-200 dark:border-ink-800">
-  <div class="shell py-12">
-    <div class="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
-      <div class="max-w-sm">
-        <a
-          href={locale === 'id' ? '/' : '/en/'}
-          class="flex items-center gap-2.5"
-        >
-          <span
-            class="grid h-9 w-9 place-items-center rounded-xl bg-brand-600 font-mono text-[13px] font-bold tracking-tight text-white"
-          >
-            {profile.initials}
-          </span>
-          <span class="text-sm font-semibold tracking-tight text-ink-950 dark:text-ink-50">
-            {profile.name}
-          </span>
-        </a>
-        <p class="mt-4 text-[14.5px] leading-relaxed text-ink-500 dark:text-ink-400">
-          {strings.footer.disclaimer}
-        </p>
-      </div>
-
-      <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer">
-        {
-          links.map((link) => (
-            <a
-              href={link.href}
-              class="text-sm text-ink-600 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </nav>
-    </div>
-
-    <div
-      class="mt-10 flex flex-col gap-3 border-t border-ink-100 pt-6 sm:flex-row sm:items-center sm:justify-between dark:border-ink-800"
-    >
-      <p class="font-mono text-[12px] text-ink-400 dark:text-ink-500">
-        © {year} {profile.name}. {strings.footer.rights}
-      </p>
-      <p class="font-mono text-[12px] text-ink-400 dark:text-ink-500">
-        {strings.footer.builtWith}
-      </p>
-    </div>
+  <div class="shell py-6">
+    <p class="font-mono text-[12px] text-ink-400 dark:text-ink-500">
+      © {year} {profile.name}. {strings.footer.rights}
+    </p>
   </div>
 </footer>

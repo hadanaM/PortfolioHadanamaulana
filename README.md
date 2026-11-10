@@ -18,13 +18,13 @@ npm run check      # validasi tipe Astro
 
 Semua konten ada di `src/data/` — tidak perlu menyentuh komponen.
 
-| File | Isi |
-|---|---|
-| `src/data/profile.ts` | Nama, ringkasan, sosial, path CV |
-| `src/data/projects.ts` | Daftar proyek (ID + EN) |
-| `src/data/experience.ts` | Pengalaman kerja / magang |
-| `src/data/skills.ts` | Kelompok keahlian |
-| `src/data/i18n.ts` | String antarmuka tiap bahasa |
+| File                     | Isi                              |
+| ------------------------ | -------------------------------- |
+| `src/data/profile.ts`    | Nama, ringkasan, sosial, path CV |
+| `src/data/projects.ts`   | Daftar proyek (ID + EN)          |
+| `src/data/experience.ts` | Pengalaman kerja / magang        |
+| `src/data/skills.ts`     | Kelompok keahlian                |
+| `src/data/i18n.ts`       | String antarmuka tiap bahasa     |
 
 ### Menambah proyek baru
 

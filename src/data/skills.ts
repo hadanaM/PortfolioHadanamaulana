@@ -37,12 +37,7 @@ export const skillGroups: SkillGroup[] = [
       id: 'Sisi administratif yang sering dilupakan engineer',
       en: 'The administrative side engineers often overlook',
     },
-    items: [
-      'MS Word (Advanced Layouting)',
-      'MS Excel',
-      'Penyusunan RAB',
-      'Administrasi Dokumen',
-    ],
+    items: ['MS Word (Advanced Layouting)', 'MS Excel', 'Penyusunan RAB', 'Administrasi Dokumen'],
   },
   {
     id: 'mechanical-iot',

@@ -13,8 +13,10 @@ export interface Experience {
   period: Record<Locale, string>;
   /** Untuk pengurutan: angka bulan mulai. */
   order: number;
-  photo: string;
-  photoAlt: Record<Locale, string>;
+  /** Boleh lebih dari satu — tampilan kartu hanya pakai foto pertama.
+   *  Kosongkan/hapus field ini jika memang tidak ada foto kegiatan. */
+  photos?: string[];
+  photoAlt?: Record<Locale, string>;
   certificate?: string;
   certificateAlt?: Record<Locale, string>;
   content: Record<Locale, ExperienceContent>;
@@ -28,15 +30,14 @@ export const experiences: Experience[] = [
       id: 'Juli 2026 — Sekarang',
       en: 'July 2026 — Present',
     },
-    photo: '/images/experience/pengajar-robotik.svg',
+    photos: [
+      '/images/experience/sd/sd1.jpeg',
+      '/images/experience/sd/sd2.jpeg',
+      '/images/experience/sd/sd3.jpeg',
+    ],
     photoAlt: {
-      id: 'Foto placeholder kegiatan mengajar robotik',
-      en: 'Placeholder photo of robotics teaching activity',
-    },
-    certificate: '/images/certificates/pengajar-robotik.svg',
-    certificateAlt: {
-      id: 'Placeholder sertifikat / surat penugasan pengajar',
-      en: 'Placeholder certificate / assignment letter',
+      id: 'Foto kegiatan mengajar robotik',
+      en: 'Photo of robotics teaching activity',
     },
     content: {
       id: {
@@ -71,12 +72,22 @@ export const experiences: Experience[] = [
       id: 'Juli 2025 — September 2025',
       en: 'July 2025 — September 2025',
     },
-    photo: '/images/experience/magang-pt-sami.svg',
+    // Contoh multi-foto: kartu tampil hanya foto pertama, sisanya geser di lightbox.
+    photos: [
+      '/images/experience/sami/sami1.jpeg',
+      '/images/experience/sami/sami2.jpeg',
+      '/images/experience/sami/sami3.jpeg',
+      '/images/experience/sami/sami4.jpeg',
+      '/images/experience/sami/sami5.jpeg',
+      '/images/experience/sami/sami6.jpeg',
+      '/images/experience/sami/sami7.jpeg',
+      '/images/experience/sami/sami8.jpeg',
+    ],
     photoAlt: {
       id: 'Foto placeholder kegiatan magang di PT SAMI',
       en: 'Placeholder photo of internship at PT SAMI',
     },
-    certificate: '/images/certificates/magang-pt-sami.svg',
+    certificate: '/images/certificates/SK MAGANG SAMI.jpeg',
     certificateAlt: {
       id: 'Placeholder sertifikat magang PT SAMI',
       en: 'Placeholder internship certificate from PT SAMI',
@@ -114,12 +125,7 @@ export const experiences: Experience[] = [
       id: 'Desember 2024 — Januari 2025',
       en: 'December 2024 — January 2025',
     },
-    photo: '/images/experience/asisten-praktikum.svg',
-    photoAlt: {
-      id: 'Foto placeholder kegiatan sebagai asisten praktikum',
-      en: 'Placeholder photo of lab assistant activity',
-    },
-    certificate: '/images/certificates/asisten-praktikum.svg',
+    certificate: '/images/certificates/SERTIF ASPRAK.jpg',
     certificateAlt: {
       id: 'Placeholder sertifikat asisten praktikum',
       en: 'Placeholder lab assistant certificate',
@@ -152,6 +158,4 @@ export const experiences: Experience[] = [
 ];
 
 /** Urut dari yang terbaru. */
-export const sortedExperiences = [...experiences].sort(
-  (a, b) => b.order - a.order,
-);
+export const sortedExperiences = [...experiences].sort((a, b) => b.order - a.order);

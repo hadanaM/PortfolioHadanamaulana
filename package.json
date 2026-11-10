@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-hadana-maulana",
+  "name": "portfolio-hadana",
   "type": "module",
   "version": "1.0.0",
   "private": true,
@@ -7,6 +7,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "deploy": "npx -y vercel@65.14.0 deploy --prod --yes",
     "check": "astro check",
     "astro": "astro"
   },
@@ -19,6 +22,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
     "typescript": "^6.0.3"
   }
 }

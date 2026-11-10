@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://portfolio-hadana-maulana.vercel.app',
+  site: 'https://portfolio-hadana.vercel.app',
   i18n: {
     defaultLocale: 'id',
     locales: ['id', 'en'],

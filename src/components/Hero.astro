@@ -36,8 +36,7 @@ const quickFacts = [
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[36rem] bg-[radial-gradient(60%_60%_at_18%_0%,rgb(198_218_245_/_0.85),transparent_70%)] dark:bg-[radial-gradient(60%_60%_at_18%_0%,rgb(35_62_103_/_0.6),transparent_70%)]"
-  >
-  </div>
+  ></div>
 
   <div class="shell">
     <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-10">
@@ -71,11 +70,7 @@ const quickFacts = [
           data-reveal
           style="--reveal-delay: 180ms"
         >
-          <a
-            href={profile.cv.href}
-            download={profile.cv.filename}
-            class="btn btn-primary"
-          >
+          <a href={profile.cv.href} download={profile.cv.filename} class="btn btn-primary">
             <Icon name="download" class="h-4 w-4" />
             {strings.hero.downloadCv}
           </a>
@@ -91,26 +86,32 @@ const quickFacts = [
           data-reveal
           style="--reveal-delay: 240ms"
         >
-          {
-            profile.socials.map((social) => (
-              <li>
-                <a
-                  href={social.href}
-                  target={social.href.startsWith('http') ? '_blank' : undefined}
-                  rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-                  class="group inline-flex items-center gap-2 text-sm text-ink-600 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
-                >
-                  <Icon
-                    name={social.key === 'email' ? 'mail' : social.key === 'linkedin' ? 'linkedin' : 'github'}
-                    class="h-4 w-4"
-                  />
-                  <span class="border-b border-transparent transition-colors group-hover:border-brand-400">
-                    {social.display}
-                  </span>
-                </a>
-              </li>
-            ))
-          }
+          {profile.socials.map((social) => (
+            <li>
+              <a
+                href={social.href}
+                target={social.href.startsWith('http') ? '_blank' : undefined}
+                rel={social.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                class="group inline-flex items-center gap-2 text-sm text-ink-600 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
+              >
+                <Icon
+                  name={
+                    social.key === 'email'
+                      ? 'mail'
+                      : social.key === 'linkedin'
+                        ? 'linkedin'
+                        : social.key === 'instagram'
+                          ? 'instagram'
+                          : 'github'
+                  }
+                  class="h-4 w-4"
+                />
+                <span class="border-b border-transparent transition-colors group-hover:border-brand-400">
+                  {social.display}
+                </span>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
@@ -118,24 +119,19 @@ const quickFacts = [
       <div class="lg:col-span-5" data-reveal style="--reveal-delay: 200ms">
         <div class="card card-hover p-6 sm:p-7">
           <div class="flex items-center gap-4">
-            <!-- Ganti dengan foto asli: <img src="/images/profile.jpg" alt="..." class="h-16 w-16 rounded-2xl object-cover" /> -->
-            <div
-              class="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-800 font-mono text-lg font-bold text-white"
-              aria-hidden="true"
-            >
-              {profile.initials}
-            </div>
+            <img
+              src="/profile.jpg"
+              alt="Foto profil Hadana Maulana"
+              class="h-16 w-16 rounded-2xl object-cover object-top"
+            />
             <div class="min-w-0">
               <p class="truncate text-base font-semibold tracking-tight text-ink-950 dark:text-ink-50">
                 {profile.name}
               </p>
               <p class="mt-0.5 flex items-center gap-1.5 text-sm text-ink-500 dark:text-ink-400">
                 <span class="relative flex h-2 w-2">
-                  <span
-                    class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
-                  ></span>
-                  <span
-                    class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                 </span>
                 {strings.hero.available}
               </p>
@@ -143,24 +139,22 @@ const quickFacts = [
           </div>
 
           <dl class="mt-6 space-y-4 border-t border-ink-100 pt-5 dark:border-ink-800">
-            {
-              quickFacts.map((fact) => (
-                <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                  <dt class="font-mono text-[11px] tracking-wider text-ink-400 uppercase dark:text-ink-500 sm:w-24 sm:shrink-0">
-                    {fact.label}
-                  </dt>
-                  <dd class="text-sm leading-snug text-ink-700 dark:text-ink-300">
-                    {fact.value}
-                  </dd>
-                </div>
-              ))
-            }
+            {quickFacts.map((fact) => (
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                <dt class="font-mono text-[11px] tracking-wider text-ink-400 uppercase dark:text-ink-500 sm:w-24 sm:shrink-0">
+                  {fact.label}
+                </dt>
+                <dd class="text-sm leading-snug text-ink-700 dark:text-ink-300">{fact.value}</dd>
+              </div>
+            ))}
           </dl>
 
           <div class="mt-6 flex items-center gap-3 border-t border-ink-100 pt-5 dark:border-ink-800">
             <Icon name="mail" class="h-4 w-4 text-ink-400" />
             <a
               href={profile.socials[0].href}
+              target="_blank"
+              rel="noreferrer noopener"
               class="truncate text-sm text-ink-600 transition-colors hover:text-brand-700 dark:text-ink-400 dark:hover:text-brand-300"
             >
               {profile.socials[0].label}
@@ -171,42 +165,40 @@ const quickFacts = [
     </div>
 
     <!-- Ringkasan penuh -->
-    <div class="mt-16 sm:mt-24" data-reveal>
+    <div class="mt-16 sm:mt-24" data-reveal id="about">
       <div class="rule mb-8"></div>
       <div class="grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-4">
-          <p class="eyebrow">
-            {locale === 'id' ? 'Tentang saya' : 'About me'}
-          </p>
-          <p
-            class="mt-4 text-2xl leading-snug font-semibold tracking-tight text-ink-950 dark:text-ink-50"
-          >
-            {
-              locale === 'id'
-                ? 'Satu halaman, tiga sudut pandang.'
-                : 'One page, three perspectives.'
-            }
+          <p class="eyebrow">{locale === 'id' ? 'Tentang saya' : 'About me'}</p>
+          <p class="mt-4 text-2xl leading-snug font-semibold tracking-tight text-ink-950 dark:text-ink-50">
+            {locale === 'id'
+              ? 'Satu halaman, tiga sudut pandang.'
+              : 'One page, three perspectives.'}
           </p>
         </div>
         <div class="lg:col-span-8">
-          <p
-            class="text-[16.5px] leading-[1.75] text-ink-600 dark:text-ink-400"
-          >
+          <p class="text-[16.5px] leading-[1.75] text-justify text-ink-600 hyphens-auto dark:text-ink-400">
             {content}
           </p>
           <div class="mt-7 flex flex-wrap gap-2">
-            {
-              (locale === 'id'
-                ? ['IT Support', 'Network Engineering', 'Troubleshooting', 'Dokumentasi Teknis', 'Robotika']
-                : [
-                    'IT Support',
-                    'Network Engineering',
-                    'Troubleshooting',
-                    'Technical Documentation',
-                    'Robotics',
-                  ]
-              ).map((tag) => <span class="chip">{tag}</span>)
-            }
+            {(locale === 'id'
+              ? [
+                  'IT Support',
+                  'Network Engineering',
+                  'Troubleshooting',
+                  'Dokumentasi Teknis',
+                  'Robotika',
+                ]
+              : [
+                  'IT Support',
+                  'Network Engineering',
+                  'Troubleshooting',
+                  'Technical Documentation',
+                  'Robotics',
+                ]
+            ).map((tag) => (
+              <span class="chip">{tag}</span>
+            ))}
           </div>
         </div>
       </div>
