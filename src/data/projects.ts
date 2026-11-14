@@ -222,44 +222,44 @@ export const projects: Project[] = [
     tech: ['IoT Architecture', 'Sensor', 'Data Flow', 'Diagram'],
     gallery: [
       {
-        src: '/images/projects/iot-monitoring-1.svg',
+        src: '/images/projects/IoT/IoT1.jpeg',
         alt: {
-          id: 'Diagram arsitektur sistem monitoring IoT',
-          en: 'Architecture diagram of the IoT monitoring system',
+          id: 'Hardware sistem monitoring Suhu dan Kelembapan berbasis IoT',
+          en: 'IoT-based Temperature and Humidity monitoring system hardware',
         },
       },
       {
-        src: '/images/projects/iot-monitoring-2.svg',
+        src: '/images/projects/IoT/IoT2.jpeg',
         alt: {
-          id: 'Alur data sensor hingga ke dashboard monitoring',
-          en: 'Sensor-to-dashboard data flow',
+          id: 'Hardware sistem monitoring Suhu dan Kelembapan berbasis IoT',
+          en: 'IoT-based Temperature and Humidity monitoring system hardware',
         },
       },
     ],
     content: {
       id: {
-        title: 'Diagram Monitoring IoT',
-        subtitle: 'Arsitektur pemantauan kondisi perangkat secara menyeluruh',
+        title: 'SistemMonitoring Suhu dan Kelembapan berbasis IoT',
+        subtitle: 'Diagram arsitektur untuk memantau kondisi perangkat dari ujung ke ujung',
         summary:
-          'Perancangan arsitektur monitoring IoT: bagaimana data sensor dikumpulkan, dikirim, diproses, lalu ditampilkan sebagai informasi yang bisa ditindaklanjuti.',
+          'Perancangan sistem monitoring Suhu dan Kelembapan: bagaimana data sensor dikumpulkan, dikirim, diproses, lalu ditampilkan sebagai informasi yang bisa ditindaklanjuti.',
         problem:
           'Tanpa perancangan arsitektur yang jelas, proyek IoT mudah berhenti pada tahap "sensor terbaca" tanpa jelas siapa yang menerima data, bagaimana dikirim, dan apa yang harus dilakukan ketika ada kegagalan.',
         approach:
-          'Saya memetakan alur data dari lapisan sensor, unit pemrosesan, koneksi jaringan, hingga ke lapisan tampilan. Setiap tahap diberi keterangan fungsi, protokol, dan kondisi kegagalan yang mungkin, sehingga diagram ini bisa dibaca sebagai acuan implementasi maupun dokumentasi teknis.',
+          'Saya memetakan alur data dari lapisan sensor, unit pemrosesan, koneksi jaringan, hingga ke lapisan tampilan. Setiap tahap diberi keterangan fungsi, protokol, dan kondisi kegagalan yang mungkin, sehingga sistem ini bisa dibaca sebagai acuan implementasi maupun dokumentasi teknis.',
         result:
-          'Arsitektur menjadi terlihat utuh dan mudah dijelaskan kepada orang lain. Diagram ini berguna sebagai acuan ketika memilih perangkat, dan sebagai lampiran dokumentasi ketika menyusun laporan teknis.',
+          'Sistem ini menjadi terlihat utuh dan mudah dijelaskan kepada orang lain. Diagram ini berguna sebagai acuan ketika memilih perangkat, dan sebagai lampiran dokumentasi ketika menyusun laporan teknis.',
       },
       en: {
-        title: 'IoT Monitoring Diagram',
-        subtitle: 'Architecture for monitoring device conditions end to end',
+        title: 'IoT-based Temperature and Humidity Monitoring System',
+        subtitle: 'Architecture diagram for end-to-end device condition monitoring',
         summary:
-          'Design of an IoT monitoring architecture: how sensor data is collected, transmitted, processed, and finally presented as actionable information.',
+          'Designing a Temperature and Humidity monitoring system: how sensor data is collected, transmitted, processed, and displayed as actionable information.',
         problem:
-          'Without a clear architectural design, IoT projects tend to stall at "the sensor reads" — with no clarity on who receives the data, how it travels, and what should happen when something fails.',
+          'Without a clear architecture design, IoT projects easily stall at the "sensor reads" stage without clarity on who receives the data, how it is transmitted, and what to do in case of failure.',
         approach:
-          'I mapped the data flow from the sensor layer, processing unit, network connection, up to the presentation layer. Each stage is annotated with its function, protocol, and possible failure conditions, so the diagram works both as an implementation reference and as technical documentation.',
+          'I mapped the data flow from the sensor layer, processing unit, network connection, to the display layer. Each stage is annotated with function, protocol, and potential failure conditions, so this system can be read as a reference for implementation or technical documentation.',
         result:
-          'The architecture became visible as a whole and easy to explain to others. The diagram helps when choosing hardware, and serves as a supporting document when writing technical reports.',
+          'The system becomes visible and easy to explain to others. This diagram serves as a reference when selecting devices, and as an attachment to documentation when preparing technical reports.',
       },
     },
   },

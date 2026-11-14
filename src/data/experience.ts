@@ -81,7 +81,6 @@ export const experiences: Experience[] = [
       '/images/experience/sami/sami5.jpeg',
       '/images/experience/sami/sami6.jpeg',
       '/images/experience/sami/sami7.jpeg',
-      '/images/experience/sami/sami8.jpeg',
     ],
     photoAlt: {
       id: 'Foto placeholder kegiatan magang di PT SAMI',
